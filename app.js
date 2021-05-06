@@ -40,7 +40,7 @@ $(function(){
                 <td>${elem.nombre}</td>
                 <td>${elem.ruta}</td>
                 <td>${elem.hacer}</td>
-                <button class="elem-delete btn btn-danger" title="eliminar"><i class="fas fa-minus"></i></button>
+                <td><button class="elem-delete-stack btn btn-danger" title="eliminar"><i class="fas fa-minus"></i></button></td>
             </tr>
             `
     })
@@ -271,5 +271,13 @@ $(function(){
             stack.push(data)
             renderStack(stack)
         }
+    })
+
+    //Eliminar un elemento del stack
+    $(document).on('click', '.elem-delete-stack', (e)=>{
+        let element = $(this)[0].activeElement.parentElement.parentElement;
+        let id =  parseInt($(element).attr('ID'));
+        stack = stack.filter(elem => elem.id !== id)
+        renderStack(stack)
     })
 })
