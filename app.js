@@ -31,6 +31,7 @@ $(function(){
     })
 
     function renderStack(data){
+        console.log('Renderiando stack')
         let template = ''
         data.forEach( elm =>{
            template += `
@@ -262,7 +263,8 @@ $(function(){
                 'nombre' : nombre,
                 'ruta' : ruta,
                 'hacer': hacer
-            }       
+            }      
+            console.log(data) 
             stack.push(data)
             renderStack(stack)
         }
