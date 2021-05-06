@@ -257,7 +257,7 @@ $(function(){
         ruta = $('#rutaID').text(); 
         let hacer = $('#IdHacer').val()
 
-        let elementExist = stack.filter(elem => elem.nombre === nombre && elem.tipo === tipo)
+        let elementExist = stack.filter(elem => elem.nombre === nombre && elem.tipo === tipo && elem.ruta === ruta)
         
         if(elementExist.length === 0){
             let data = {
@@ -279,5 +279,27 @@ $(function(){
         let id =  parseInt($(element).attr('ID'));
         stack = stack.filter(elem => elem.id !== id)
         renderStack(stack)
+    })
+
+    $('#IdPegar').click((e)=>{
+        if(stack.length>0){
+            let ruta_destino = $('#rutaID').text();
+            stack.forEach(elem =>{
+                let nombre = elem.nombre;
+                let ruta_antigua = elem.ruta;
+                let hacer = elem.hacer
+
+                let postData = {
+                    ruta_nombre : `${ruta}/${nombre}`,
+                    destino: ruta_destino,
+                    hacer: hacer
+
+                }
+                console.log(postData);
+                $.post('copiar_pegar.php',postData, (response)=>{
+                    console.log(response)
+                })
+            })
+        }
     })
 })
