@@ -1,7 +1,7 @@
-var Stack = [];
 
 $(function(){
      //Inicializá el tablero
+     let stack = []
      let ruta =  'raiz'; 
      $('#ruta').attr('value',ruta)
      $('#rutaID').text(ruta)
@@ -30,6 +30,20 @@ $(function(){
         })
     })
 
+    function renderStack(data){
+        let template = ''
+        data.forEach( elm =>{
+           template += `
+           <tr ID=${elm.id}>
+                <td>${elem.nombre}</td>
+                <td>${elem.ruta}</td>
+                <td>${elem.hacer}</td>
+            </tr>
+            `
+    })
+    $('#StackTable').html(template)
+    }
+
 
     //Se extrae los documentos
     function reloadApp(ruta='raiz'){
@@ -51,7 +65,7 @@ $(function(){
                         <button class="elem-edit btn btn-success" title="editar" type="submit"><i class="far fa-edit"></i></button>
                         <button class="elem-perm btn btn-info" title="permisos" type="submit"><i class="far fa-user"></i></button>
                         <button class="elem-user btn btn-warning" title="informacion" type="submit"><i class="fas fa-question-circle"></i></button>
-                        <input class="ml-4" type="checkbox" name="${elem.name}" id="${ruta}""/>
+                        <button class="elem-plus btn btn-success" title="agg stack"><i class="fas fa-plus"></i></button>
                     </td>          
                 </tr>`;
                 });
@@ -230,26 +244,27 @@ $(function(){
     })
 
     //Agregar a la pila
-    $(':checkbox').change(function() {
+     //agregar elementos al stack
+     $(document).on('click', '.elem-plus',(e)=>{ 
+        let element = $(this)[0].activeElement.parentElement.parentElement;
+        const IDelement = $(element).attr('nombreID').split('/'); //se estrae el nombre del id
         
-        var tamplate = ''
-        $(':checkbox:checked').each(function() {
-            let element = $(this)
-            let name = element.attr('name')
-            let ruta = element.attr('id')
+        let nombre = IDelement[0];
+        let tipo = IDelement[1];
+        ruta = $('#rutaID').text(); 
+        let hacer = $('#IdHacer').val()
 
-            tamplate+= ` <tr>
-                            <td>${name}</td>
-                            <td>${ruta}</td>
-                            <td>
-                                <select class="custom-select">
-                                    <option value="copiar">copiar</option>
-                                    <option value="pegar">cortar</option>
-                                </select>
-                            </td>
-                        </tr>`;
-           
-        });
-        $('#StackTable').html(tamplate)
-    });
+        let elementExist = stack.filter(elem => elem.nombre === nombre && elem.tipo === tipo)
+
+        if(elementExist.length === 0){
+            let data = {
+                'id' : stack.length,
+                'nombre' : nombre,
+                'ruta' : ruta,
+                'hacer': hacer
+            }       
+            stack.push(data)
+            renderStack(stack)
+        }
+    })
 })
