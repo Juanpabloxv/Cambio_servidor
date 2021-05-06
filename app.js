@@ -30,15 +30,17 @@ $(function(){
         })
     })
 
+    //render stack
     function renderStack(data){
         console.log('Renderiando stack')
         let template = ''
-        data.forEach( elm =>{
+        data.forEach( elem =>{
            template += `
-           <tr ID=${elm.id}>
+           <tr ID=${elem.id}>
                 <td>${elem.nombre}</td>
                 <td>${elem.ruta}</td>
                 <td>${elem.hacer}</td>
+                <button class="elem-delete btn btn-danger" title="eliminar"><i class="fas fa-minus"></i></button>
             </tr>
             `
     })
@@ -256,15 +258,16 @@ $(function(){
         let hacer = $('#IdHacer').val()
 
         let elementExist = stack.filter(elem => elem.nombre === nombre && elem.tipo === tipo)
-
+        
         if(elementExist.length === 0){
             let data = {
-                'id' : stack.length,
-                'nombre' : nombre,
-                'ruta' : ruta,
-                'hacer': hacer
+                id : stack.length,
+                nombre : nombre,
+                ruta : ruta,
+                hacer : hacer,
+                tipo:  tipo
             }      
-            console.log(data) 
+            
             stack.push(data)
             renderStack(stack)
         }
