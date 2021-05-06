@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand">Gestor de archivos</a>
+    </nav>
+    <div class="container p-4">
+        <div class="row">
+            <div class="col-md-4">
+                <div id="message"></div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Ingresé archivo ó carpeta</h5>
+            <!-- Aqui está el formulario de las carpetas -->
+                        <form  id="crearArchivos">
+                            <div class="form-group">
+                                <label for="ruta">Ruta</label>
+                                <input  id='ruta' class='form-control' type='text' placeholder='raiz' value="ruta" />
+                            </div>
+                            <div class="form-group">
+                                <input  class="form-control" type="text" placeholder="Ingresé nombre" id="nombre">
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Selecioné una opción</label>
+                                <select class="custom-select custom-select-lg mb-3" id="tipo">
+                                    <option value="archivo">Archivo</option>
+                                    <option value="carpeta">Carpeta</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-block" name="action" value="crear">Crear</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Aquí está la tabla -->
+            <div class="col-md-7">
+               <p>Ruta: <i id="rutaID"></i></p> 
+                <table class="table table-bordered table-sm" id="tablaID">
+                    <thead class="thead-dark">
+                        <tr>
+                            <td>Nombre</td>
+                            <td>Usarios</td>
+                            <td>Permisos</td>
+                            <td>Tipo</td>
+                            <td>
+                                <form>
+                                    <div class="row">
+                                        <div class="col">
+                                            <select class="custom-select">
+                                                <option value="copiar">copiar</option>
+                                                <option value="pegar">cortar</option>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <button type="submit" class="btn btn-success btn-block">Aplicar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    </thead>
+                        <tbody>
+                            <tr nombreID="carpeta"> 
+                                <td>Carpera</td>
+                                <td>Diego</td>
+                                <td>777</td>
+                                <td>Carpeta</td>
+                                <td>
+                                    <button class="elem-delete btn btn-danger" title="eliminar"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="elem-edit btn btn-success" title="editar"><i class="far fa-edit"></i></button>
+                                    <button class="elem-perm btn btn-info" title="permisos"><i class="far fa-user"></i></button>
+                                    <button class="elem-user btn btn-warning" title="informacion" type="submit"><i class="fas fa-question-circle"></i></button>
+                                    <input class="ml-4" type="checkbox" name="carpeta" id="raiz"/>
+                                </td>          
+                            </tr>
+                            <tr nombreID="llanta">
+                                <td>llanta</td>
+                                <td>juan</td>
+                                <td>7767</td>
+                                <td>archivo</td>
+                                <td>
+                                    <button class="elem-delete btn btn-danger" title="eliminar"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="elem-edit btn btn-success" title="editar"><i class="far fa-edit"></i></button>
+                                    <button class="elem-perm btn btn-info" title="permisos"><i class="far fa-user"></i></button>
+                                    <button class="elem-user btn btn-warning" title="informacion" type="submit"><i class="fas fa-question-circle"></i></button>
+                                    <input class="ml-4" type="checkbox" name="llanta" id="raiz/user"/>
+                                </td>          
+                            </tr>
+                        </tbody>
+                </table>
+                <form>
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-outline-secondary btn-block">Pegar</button>
+                        </div>
+                        <div class="col">
+                            <a  class="btn btn-outline-primary btn-block" id="volver">Volver</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>   
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <table class="table table-bordered table-sm" >
+                    <thead class="thead-dark">
+                        <tr>
+                            <td>Nombre</td>
+                            <td>Ruta</td>
+                            <td>Opciones</td>
+                        </tr>
+                    </thead>
+                    <tbody id="StackTable">
+                        <tr>
+                            <td>Carpeta</td>
+                            <td>raiz/hola</td>
+                            <td>copiar</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Modal  Cambiar nombre-->
+<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalPermisos">Cambiar nombre</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form id="formEditId">
+                <div class="form-group">
+                    <input type="text" placeholder="Documento" id="NuevoNombre">
+                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+   <!-- Modal cambiar permisos-->
+<div class="modal fade" id="modalChangePer" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalPermisos">Cambiar Permisos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form id="form-change-per">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    <div class="form-group" id="form-change-per">
+                        <label for="NumPropietario">Propietario</label>
+                        <select class="custom-select" id="NumPropietario">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                        </select>
+                    </div>
+                        <div class="form-group">
+                            <label for="NumGrupo">Grupo</label>
+                            <select class="custom-select" id="NumGrupo">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="7">6</option>
+                                <option value="7">7</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="NumOtros">Otros</label>
+                            <select class="custom-select" id="NumOtros">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="6">7</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success">Aceptar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+  <!-- Modal cambiar propietarios-->
+  <div class="modal fade" id="modalChangeProp" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalPermisos">Cambiar Propietarios</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form id="form-change-prop">
+                <div class="input-group mb-3">
+                        <div class="form-group" >
+                            <label for="change-user">Propietario</label>
+                            <select class="custom-select" id="change-user">
+                                <option value="Fredy">Fredy</option>
+                                <option value="Jose">Jose</option>
+                                <option value="Danier">Danier</option>
+                                <option value="Juan">Juan</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-warning">Aceptar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+</body>
+</html>
