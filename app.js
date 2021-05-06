@@ -1,9 +1,8 @@
 var Stack = [];
-let ruta =  'raiz'; 
 
 $(function(){
      //Inicializá el tablero
-     
+     let ruta =  'raiz'; 
      $('#ruta').attr('value',ruta)
      $('#rutaID').text(ruta)
 
@@ -16,12 +15,14 @@ $(function(){
      $('#crearArchivos').submit(e => {
         ruta = $('#rutaID').text()
         e.preventDefault();
-        const postData = {
+        
+	const postData = {
             ruta : $('#ruta').val(),
             name : $('#nombre').val(),
             tipo : $('#tipo').val()
         };
-        $.post('crear.php', postData, (response)=>{
+        console.log(postData)
+	$.post('crear.php', postData, (response)=>{
             $('#crearArchivos').trigger('reset');
             console.log(response)
             reloadApp(ruta);
@@ -96,19 +97,20 @@ $(function(){
         $('#form-change-prop').submit(e => {
             e.preventDefault();
             let nuevo_propietario = $('#change-user').val();
-            console.log(nuevo_propietario)
+          
             const postData = {
                 nuevo : nuevo_propietario,
                 nombre : nombre,
                 ruta : ruta,
                 tipo: 'Cambiar_Propietario'
             };
-            $.post('cambiar.php', postData, (response)=>{
+        	console.log(postData)   
+	 $.post('cambiar.php', postData, (response)=>{
                 console.log(response)
                 console.log(response)
                 $('#form-change-prop').trigger('reset');
                 $('#modalChangeProp').modal('toggle');
-                location.reload()
+                location.reload();
                 
                 
             })
@@ -133,23 +135,24 @@ $(function(){
             let perPropietario = $('#NumPropietario').val();
             let perGrupo = $('#NumGrupo').val();
             let perOtros = $('#NumOtros').val();
-            console.log(perPropietario, per)
+           
             let nuevo_persimo = `${perPropietario}${perGrupo}${perOtros}`
 
     
             if(parseInt(nuevo_persimo.length) === 3){
-                const postData = {
+               
+		const postData = {
                     nuevo : nuevo_persimo,
                     nombre : nombre,
                     ruta : ruta,
                     tipo: 'Cambiar_permiso'
                 };
-
+		console.log(postData);
                 $.post('cambiar.php', postData, (response)=>{
                     $('#form-change-per').trigger('reset');
                     $('#modalChangePer').modal('toggle');
                     console.log(response)
-                   location.reload()
+                   location.reload();
                 })
             }
             
@@ -177,15 +180,15 @@ $(function(){
                     ruta : ruta,
                     tipo: 'Cambiar_Nombre'
                 };
-
-                console.log(ruta,nombre, $('#NuevoNombre').val())
+		console.log(postData);
+                
                 $('#formEditId').trigger('reset');
                 $.post('cambiar.php', postData, (response)=>{
                     $('#formEditId').trigger('reset');
                     $('#modalEdit').modal('toggle');
-                    console.log(response)
-                    location.reload()
-                   ;
+                location.reload();
+                   
+               
                 })
             }
             

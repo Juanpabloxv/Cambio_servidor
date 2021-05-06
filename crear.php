@@ -1,3 +1,4 @@
+
 <?php 
     #Funcion para crear los directorios
     function crearDirectorio($directorio,$ruta){
