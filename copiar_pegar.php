@@ -9,7 +9,9 @@ function copiar($nombre,$ruta){
 }
 $cont = json_decode($_POST['sendFiles'], true);
 
-echo $cont;
+foreach($cont as $files){
+    echo $files;
+}
 
 
 ?>
