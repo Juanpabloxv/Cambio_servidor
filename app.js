@@ -299,10 +299,11 @@ $(function(){
                 }
                 sendFiles.push(postData)
             })
+            stack = []
+            $.post('copiar_pegar.php', {sendFiles}, (response) => {
+                console.log(response)
+            })
         }
-        stack = []
-        $.post('copiar_pegar.php', {sendFiles}, (response) => {
-            console.log(response)
-        })
+       
     })
 })
