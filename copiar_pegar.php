@@ -7,15 +7,9 @@ function cortar($nombre,$ruta){
 function copiar($nombre,$ruta){
     shell_exec("cp -r $nombre $ruta");
 }
-$ruta = $_POST['ruta_nombre'];
-$Destino = $_POST['destino'];
-$hacer = $_POST['hacer'];
+$cont = json_decode($_POST['sendFiles'], true);
 
-if ($hacer == 'copiar'){
-    copiar($Destino, $ruta);
-}elseif($hacer == 'cortar'){
-    cortar($Destino, $ruta);
-}
+echo $cont;
 
 
 ?>

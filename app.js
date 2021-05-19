@@ -284,6 +284,8 @@ $(function(){
     $('#IdPegar').click((e)=>{
         if(stack.length>0){
             let ruta_destino = $('#rutaID').text();
+            let sendFiles = []
+
             stack.forEach(elem =>{
                 let nombre = elem.nombre;
                 let ruta_antigua = elem.ruta;
@@ -295,11 +297,12 @@ $(function(){
                     hacer: hacer
 
                 }
-                console.log(postData);
-                $.post('copiar_pegar.php',postData, (response)=>{
-                    console.log(response)
-                })
+                sendFiles.push(postData)
             })
         }
+        stack = []
+        $.post('copiar_pegar.php', {sendFiles}, (response) => {
+            console.log(response)
+        })
     })
 })
