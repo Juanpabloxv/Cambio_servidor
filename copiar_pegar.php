@@ -6,17 +6,23 @@ function cortar($nombre,$ruta){
 
 function copiar($nombre,$ruta){
     shell_exec("cp -r $nombre $ruta");
+    echo "Elemento fue copiado";
 }
-$cont = json_decode($_POST['sendFiles'], true);
 
-foreach($cont as $files){
-    if($files['hacer'] == 'copiar'){
-        copiar($files['ruta_nombre'], $files['destino']);
+if (isset($_POST['sendFiles'])){
+    $cont = json_decode($_POST['sendFiles'], true);
+
+    foreach($cont as $files){
+        if($files['hacer'] == 'copiar'){
+            copiar($files['ruta_nombre'], $files['destino']);
+        }
+        else if($files['hacer'] == 'cortat'){
+            cortar($files['ruta_nombre'], $files['destino']);
+        }
+        else echo "No hice nada :(";
     }
-    else if($files['hacer'] == 'cortat'){
-        cortar($files['ruta_nombre'], $files['destino']);
-    }
-}
+
+}else echo "No tengo nada en POST"
 
 
 ?>
