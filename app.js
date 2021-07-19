@@ -304,9 +304,9 @@ $(function(){
             $.post('copiar_pegar.php', {sendFiles}, (response) => {
                 console.log('Respuesta copiar y pegar')
                 console.log(response)
-                localStorage.setItem("ruta", ('#rutaID').text())
-                location.reload()
             })
+            localStorage.setItem("ruta", ('#rutaID').text())
+            location.reload()
         }
        
     })
