@@ -10,7 +10,12 @@ function copiar($nombre,$ruta){
 $cont = json_decode($_POST['sendFiles'], true);
 
 foreach($cont as $files){
-    echo $files;
+    if($files['hacer'] == 'copiar'){
+        copiar($files['ruta_nombre'], $files['destino']);
+    }
+    else if($files['hacer'] == 'cortat'){
+        cortar($files['ruta_nombre'], $files['destino']);
+    }
 }
 
 

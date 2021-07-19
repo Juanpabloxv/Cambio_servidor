@@ -300,7 +300,8 @@ $(function(){
                 sendFiles.push(postData)
             })
             stack = []
-            $.post('copiar_pegar.php', {sendFiles}, (response) => {
+            $.post('copiar_pegar.php', {SendFiles}, (response) => {
+                console.log('Respuesta copiar y pegar')
                 console.log(response)
             })
         }
