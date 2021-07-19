@@ -2,7 +2,7 @@
 $(function(){
      //Inicializá el tablero
      let stack = []
-     let ruta =  'raiz'; 
+     let ruta =  localStorage.getItem("raiz")? localStorage.getItem("raiz"): 'raiz'; 
      $('#ruta').attr('value',ruta)
      $('#rutaID').text(ruta)
 
@@ -300,9 +300,12 @@ $(function(){
                 sendFiles.push(postData)
             })
             stack = []
-            $.post('copiar_pegar.php', {SendFiles}, (response) => {
+
+            $.post('copiar_pegar.php', {sendFiles}, (response) => {
                 console.log('Respuesta copiar y pegar')
                 console.log(response)
+                localStorage.setItem("ruta", ('#rutaID').text())
+                location.reload()
             })
         }
        
