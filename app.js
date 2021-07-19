@@ -2,7 +2,7 @@
 $(function(){
      //Inicializá el tablero
      let stack = []
-     let ruta =  localStorage.getItem("raiz")? localStorage.getItem("raiz"): 'raiz'; 
+     let ruta =  'raiz'; 
      $('#ruta').attr('value',ruta)
      $('#rutaID').text(ruta)
 
@@ -305,7 +305,7 @@ $(function(){
                 console.log('Respuesta copiar y pegar')
                 console.log(response)
             })
-            localStorage.setItem("ruta", ('#rutaID').text())
+
             location.reload()
         }
        
