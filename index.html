@@ -8,10 +8,16 @@
     <link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel='icon' type='image/png' href="Explorer-icon.png">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand">Gestor de archivos</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="justify-content: flex-end;"> 
+        <div style="margin: auto;">
+            <a class="navbar-brand" href="#"  style="font-size: 1.5rem;">Gestor de archivos</a>
+        </div> 
+        <div>
+            <a class="navbar-brand" href="Guía del usuario.pdf" target="_blank">Guia de usuario</a>
+        </div>    
     </nav>
     <div class="container p-4">
         <div class="row">
@@ -140,7 +146,7 @@
         <div class="modal-body">
             <form id="formEditId">
                 <div class="form-group">
-                    <input type="text" placeholder="Documento" id="NuevoNombre">
+                    <input type="text" placeholder="Ingresé nuevo nombre" id="NuevoNombre">
                     <button type="submit" class="btn btn-primary">Aceptar</button>
                 </div>
             </form>
