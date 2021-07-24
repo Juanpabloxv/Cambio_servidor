@@ -67,8 +67,8 @@ $(function(){
                         <button class="elem-delete btn btn-danger" title="eliminar"><i class="fas fa-trash-alt"></i></button>
                         <button class="elem-edit btn btn-success" title="editar" type="submit"><i class="far fa-edit"></i></button>
                         <button class="elem-perm btn btn-info" title="permisos" type="submit"><i class="far fa-user"></i></button>
-                        <button class="elem-user btn btn-warning" title="informacion" type="submit"><i class="fas fa-question-circle"></i></button>
-                        <button class="elem-plus btn btn-success" title="agg stack"><i class="fas fa-plus"></i></button>
+                        <button class="elem-user btn btn-warning" title="propietarios" type="submit"><i class="fas fa-question-circle"></i></button>
+                        <button class="elem-plus btn btn-success" title="agregar"><i class="fas fa-plus"></i></button>
                     </td>          
                 </tr>`;
                 });
